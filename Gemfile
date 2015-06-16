@@ -16,6 +16,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
 gem 'bootstrap-sass', '3.3.4.1'
 gem 'sprockets', '3.2.0'
+gem 'bcrypt-ruby', '3.1.5' #bcrypt(暗号化)を使うため
 
 group :doc do
   gem 'sdoc', '~> 0.4.0', require: false
