@@ -9,4 +9,20 @@ class User < ActiveRecord::Base
   before_save { self.email = email.downcase }
   #gem bcrypt-ruby
   has_secure_password
+
+  def User.new_remember_token
+    SecureRandom.urlsafe_base64
+  end
+
+  def User.encrypt(token)
+    #to_sメソッドを呼び出しているのは、nilトークンを扱えるようにするためです。ブラウザでnilトークンが発生することはあってはなりませんが、テスト中に発生することはありえるためです
+    Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  private
+    #インデントを1段深くしてあります (経験上、こうしておくことをお勧めします)。
+
+    def create_remember_token
+      self.remember_token = User.encrypt(User.new_remember_token)
+    end
 end
