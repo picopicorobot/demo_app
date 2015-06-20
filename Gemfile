@@ -30,4 +30,6 @@ end
 group :test do
   gem 'selenium-webdriver'
   gem 'capybara'
+  #RSpecを使用してRubyで「ドメイン特化言語 (domain-specific language)」を定義
+  gem 'factory_girl_rails', '4.5.0'
 end
