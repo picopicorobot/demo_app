@@ -6,5 +6,7 @@ class CreateMicroposts < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+    # user idに関連付けられたすべてのマイクロポストを作成時刻の逆順で取り出すためです
+    add_index :microposts, [:user_id, :created_at]
   end
 end
