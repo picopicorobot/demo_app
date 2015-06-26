@@ -11,6 +11,16 @@ module SessionsHelper
     self.current_user = user
   end
 
+  # Before actions
+  def signed_in_user
+    unless signed_in?
+
+      store_location
+      # flash[:notice]の簡略版
+      redirect_to signin_url, notice: "Please sign in."
+    end
+  end
+
   def current_user=(user)
     @current_user = user
   end
