@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
   has_many :microposts, dependent: :destroy
   validates :name, presence: true, length: { maximum: 50 }
-  
+
   # validates(:name, presence: true) と同じ
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, format: { with: VALID_EMAIL_REGEX }, uniqueness: { case_sensitive: false }
@@ -18,6 +18,12 @@ class User < ActiveRecord::Base
   def User.encrypt(token)
     #to_sメソッドを呼び出しているのは、nilトークンを扱えるようにするためです。ブラウザでnilトークンが発生することはあってはなりませんが、テスト中に発生することはありえるためです
     Digest::SHA1.hexdigest(token.to_s)
+  end
+
+  def feed
+    # このコードは準備段階です。
+    # 完全な実装は第11章「ユーザーをフォローする」を参照してください。
+    Micropost.where("user_id = ?", id)
   end
 
   private
